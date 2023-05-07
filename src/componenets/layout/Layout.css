@@ -1,0 +1,29 @@
+.Layout { 
+    height: 100%;
+    border: 2px solid black;
+   
+    
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); 
+    grid-template-rows: 10% 85% 5%; 
+  }
+  
+  .Layout> * {
+    border: 2px solid black;
+  }
+  
+  .Layout>header, footer {
+    grid-column: span 12;
+    background:#162938;
+  }
+  
+  .Layout>aside {
+    grid-column: span 2;
+    background:#162938;
+  }
+  
+  .Layout>main {
+    grid-column: span 10;   
+    background:#162938;
+  } 
