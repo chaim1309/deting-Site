@@ -3,6 +3,8 @@ import'./Layout.css';
 import Menu from "../menu/Menu";
 import Header from "../header/Header";
 import HomePage from "../people-container/HomePage";
+import Login from "../loginPage/Login";
+
 
 function Layout() {
 
@@ -21,7 +23,7 @@ function Layout() {
 
                     <Routes>
                     <Route path="/" element={<HomePage />} />
-                       
+                    <Route path="/login" element={<Login />} />
                     </Routes>
 
 
