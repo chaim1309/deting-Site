@@ -10,38 +10,38 @@ import { RiLockPasswordLine } from "react-icons/ri";
 
 
 
-async function Login() {
+function Login() {
     let [userName, setUserName] = useState("");
     let [password, setPassword] = useState("");
 
+    async function loginClicked() {
+        try {
+            const response = await axios.post("http://localhost:8080/users/login", {
+                userName,
+                password
 
-    try {
-        const response = await axios.post("http://localhost:8080/users/login", {
-            userName,
-            password
+            });
+            console.log(response);
+            let token = response.data;
+            let decodedToken: any = jwt_decode(token);
+            let strSuccessfulLoginData: string = decodedToken.sub;
 
-        });
-        console.log(response);
-        let token = response.data;
-        let decodedToken: any = jwt_decode(token);
-        let strSuccessfulLoginData: string = decodedToken.sub;
+            let successfulLoginData: ISuccessfulLoginData = JSON.parse(strSuccessfulLoginData)
 
-        let successfulLoginData: ISuccessfulLoginData = JSON.parse(strSuccessfulLoginData)
-
-        console.log(successfulLoginData)
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            console.log(successfulLoginData)
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 
-    } catch (e: any) {
-        console.error(e);
-        if (e.response?.data?.error?.massage) {
-            alert(e.response.data.error.massage)
-        } else {
-            alert("Login invalid,try later")
+        } catch (e: any) {
+            console.error(e);
+            if (e.response?.data?.error?.massage) {
+                alert(e.response.data.error.massage)
+            } else {
+                alert("Login invalid,try later")
+            }
         }
+
     }
-
-
     return (
         <div className="Login">
 
@@ -77,7 +77,7 @@ async function Login() {
                             </label>
                             <a href="#">forgot password?</a>
                         </div>
-                        <input type="button" className="btn" value="login" onClick={Login} />
+                        <input type="button" className="btn" value="login" onClick={loginClicked} />
                         <div className="login-register">
                             <p>Don't have an account?
 
